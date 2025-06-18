@@ -58,6 +58,9 @@ func parseDockerImagesOutput(output string) []DockerImage {
 }
 
 func parseSize(sizeStr string) int64 {
+	if len(sizeStr) < 2 {
+		return 0
+	}
 	unit := sizeStr[len(sizeStr)-2:]
 	valueStr := sizeStr[:len(sizeStr)-2]
 	value, err := strconv.ParseFloat(strings.TrimSpace(valueStr), 64)
@@ -113,6 +116,18 @@ func deleteImage(imageID, repo string, images *[]DockerImage, filteredImages *[]
 	}
 }
 
+func filterImages(images []DockerImage, filter string) []DockerImage {
+	var filtered []DockerImage
+	for _, img := range images {
+		if filter == "" ||
+			strings.Contains(strings.ToLower(img.Repository), strings.ToLower(filter)) ||
+			strings.Contains(strings.ToLower(img.ImageID), strings.ToLower(filter)) {
+			filtered = append(filtered, img)
+		}
+	}
+	return filtered
+}
+
 func main() {
 	cmd := exec.Command("docker", "images")
 	var out bytes.Buffer
@@ -135,31 +150,26 @@ func main() {
 
 	updateList := func(filter string) {
 		list.Clear()
-		filteredImages = []DockerImage{}
+		filteredImages = filterImages(images, filter)
 
-		for _, img := range images {
-			if filter == "" || strings.Contains(strings.ToLower(img.Repository), strings.ToLower(filter)) ||
-				strings.Contains(strings.ToLower(img.ImageID), strings.ToLower(filter)) {
-
-				repo := img.Repository
-				if len(repo) > 35 {
-					repo = repo[:32] + "..."
-				}
-
-				imageID := img.ImageID
-				if len(imageID) > 12 {
-					imageID = imageID[:12]
-				}
-
-				created := img.Created
-				if len(created) > 15 {
-					created = created[:12] + "..."
-				}
-
-				display := fmt.Sprintf("%-8s | %-35s | %-12s | %-15s", img.Size, repo, imageID, created)
-				list.AddItem(display, "", 0, nil)
-				filteredImages = append(filteredImages, img)
+		for _, img := range filteredImages {
+			repo := img.Repository
+			if len(repo) > 35 {
+				repo = repo[:32] + "..."
 			}
+
+			imageID := img.ImageID
+			if len(imageID) > 12 {
+				imageID = imageID[:12]
+			}
+
+			created := img.Created
+			if len(created) > 15 {
+				created = created[:12] + "..."
+			}
+
+			display := fmt.Sprintf("%-8s | %-35s | %-12s | %-15s", img.Size, repo, imageID, created)
+			list.AddItem(display, "", 0, nil)
 		}
 	}
 	updateList("")
