@@ -79,7 +79,7 @@ func parseSize(sizeStr string) int64 {
 	}
 }
 
-func deleteImage(imageID, repo string, images *[]DockerImage, filteredImages *[]DockerImage, inputField *tview.InputField, app *tview.Application, flex *tview.Flex, updateList func(string)) {
+func deleteImage(imageID, repo string, images *[]DockerImage, inputField *tview.InputField, app *tview.Application, flex *tview.Flex, updateList func(string)) {
 	cmd := exec.Command("docker", "rmi", imageID)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
@@ -200,7 +200,7 @@ func main() {
 			if currentIndex >= 0 && currentIndex < len(filteredImages) {
 				imageID := filteredImages[currentIndex].ImageID
 				repo := filteredImages[currentIndex].Repository
-				deleteImage(imageID, repo, &images, &filteredImages, inputField, app, flex, updateList)
+				deleteImage(imageID, repo, &images, inputField, app, flex, updateList)
 			}
 			return nil
 		}
@@ -211,7 +211,7 @@ func main() {
 		if index >= 0 && index < len(filteredImages) {
 			imageID := filteredImages[index].ImageID
 			repo := filteredImages[index].Repository
-			deleteImage(imageID, repo, &images, &filteredImages, inputField, app, flex, updateList)
+			deleteImage(imageID, repo, &images, inputField, app, flex, updateList)
 		}
 	})
 
