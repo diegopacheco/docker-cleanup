@@ -19,3 +19,25 @@ Delete image: <br/>
 ### Fun Fact
 
 Running on my machine, was able to save `53GB` of disk space by deleting unused Docker images.
+
+### Developed using Cursor
+
+Cursor (https://www.cursor.com/) in Action 
+<img src="cursor.png" width="800"> <br/>
+
+PROS
+
+* Free Tier :-) 
+* Cursor is a FORK of VSCode
+* It works
+* Can run tests from prompt
+* Provide DIFFs before applying
+* Can ask questions
+* Has Agentic Mode
+
+CONS
+* Slower than Original VS Code in Linux
+* Crashed in Linux
+* Moving around is not super smooth
+* Most of this feature Copilot for VS Code already have it (yes they copy from cursor)
+* I asked cursor to generate tests, the tests was bad because did not test my app, so I had to ask again and point whats was wrong.
