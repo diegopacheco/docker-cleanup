@@ -41,3 +41,9 @@ CONS
 * Moving around is not super smooth
 * Most of this feature Copilot for VS Code already have it (yes they copy from cursor)
 * I asked cursor to generate tests, the tests was bad because did not test my app, so I had to ask again and point whats was wrong.
+
+### Related POCs
+
+* Anthropic Claude Code https://github.com/diegopacheco/claude-code-poc
+* OpenAI Codex: https://github.com/diegopacheco/codex-poc
+* Google Jules https://github.com/diegopacheco/google-jules-poc
