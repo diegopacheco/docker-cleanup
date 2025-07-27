@@ -48,3 +48,4 @@ CONS
 * OpenAI Codex: https://github.com/diegopacheco/codex-poc
 * Google Jules https://github.com/diegopacheco/google-jules-poc
 * Gemini-cli POC: https://github.com/diegopacheco/gemini-cli-poc
+* Sketch POC: https://github.com/diegopacheco/sketch-dev-poc
