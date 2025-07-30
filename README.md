@@ -2,6 +2,8 @@
 
 Simple Go CLI tool to clean up Docker images by searching for images and deleting them interactively.
 
+Built with Cursor: https://cursor.com/en
+
 ### Run
 
 ```bash
